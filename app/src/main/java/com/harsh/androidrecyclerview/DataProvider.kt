@@ -10,13 +10,13 @@ class DataProvider {
         fun feeds(): List<Feed> {
             val feeds: MutableList<Feed> = mutableListOf()
 
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
-            feeds.add(Feed(comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
+            feeds.add(Feed("loreum ipsum", comments()))
 
             return feeds.toList()
         }

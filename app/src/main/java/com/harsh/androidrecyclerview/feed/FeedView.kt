@@ -11,6 +11,6 @@ class FeedView(
 ) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(feed: Feed) {
-        tvPost.text = feed.comment[0].value
+        tvPost.text = feed.description
     }
 }
