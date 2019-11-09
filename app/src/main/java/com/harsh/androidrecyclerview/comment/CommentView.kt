@@ -1,16 +1,16 @@
-package com.harsh.androidrecyclerview
+package com.harsh.androidrecyclerview.comment
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.harsh.androidrecyclerview.data.Feed
+import com.harsh.androidrecyclerview.R
 
-class FeedView(
+class CommentView(
     itemView: View,
     private val tvPost: TextView = itemView.findViewById(R.id.tv_post)
 ) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(feed: Feed) {
-        tvPost.text = feed.comment
+    fun bind(comment: Comment) {
+        tvPost.text = comment.value
     }
 }

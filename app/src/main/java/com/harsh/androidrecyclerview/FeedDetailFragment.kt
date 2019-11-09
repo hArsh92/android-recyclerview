@@ -4,30 +4,34 @@ import android.app.Dialog
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
+import com.harsh.androidrecyclerview.comment.Comment
+import com.harsh.androidrecyclerview.comment.CommentAdapter
 
 class FeedDetailFragment : BottomSheetDialogFragment() {
-
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT)
-    }
 
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
 
-        val comment = arguments?.getString("feed")
-        val view = LayoutInflater.from(context)
-            .inflate(R.layout.feed_detail, null)
+        val comments = arguments?.getParcelableArrayList<Comment>("feed")
+        val view = LayoutInflater.from(context).inflate(R.layout.feed_detail, null)
 
-        val tvComment = view.findViewById<TextView>(R.id.tv_comment)
-        tvComment.text = comment
+
+        val rvComments = view.findViewById<RecyclerView>(R.id.rv_comments)
+        rvComments?.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvComments?.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        rvComments?.adapter = CommentAdapter(comments!!.toList())
 
         dialog.setContentView(view)
 
@@ -44,11 +48,13 @@ class FeedDetailFragment : BottomSheetDialogFragment() {
                     override fun onStateChanged(view: View, i: Int) {
                         when (i) {
                             BottomSheetBehavior.STATE_HIDDEN -> dialog.dismiss()
-                            else -> { }
+                            BottomSheetBehavior.STATE_HALF_EXPANDED -> dialog.dismiss()
+                            else -> {
+                            }
                         }
                     }
 
-                    override fun onSlide(view: View, v: Float) { }
+                    override fun onSlide(view: View, v: Float) {}
                 })
             }
         }
